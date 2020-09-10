@@ -26,12 +26,11 @@ classoption: dvipsnames
         - Temporal logics
     - Quickstrom
         - Idea: mix these together
-                - Use temporal logic and learnings from formal methods
+                - Use linear temporal logic (LTL) and learnings from formal methods
                 - Use it for browser testing
                 - Leverage the DOM and introspective capabilities
                 - Run as property-based tests
         - Started in April 2020
-- Current State of Quickstrom
     - How it works
         1. Navigate to *origin page*
         2. Record behavior (sequence of states)
@@ -41,6 +40,42 @@ classoption: dvipsnames
             4. Go to 1
         3. Check that the behavior satisfies the specification
         4. If rejected, shrink sequence of actions
+
+- Specification language
+    - Specification language
+        - Based on PureScript
+        - Extended with:
+            - LTL operators (propositional temporal logic)
+            - DOM queries
+        - Use regular PureScript packages
+        - Interpreter built in Haskell
+    - DOM Queries
+        - Two operators:
+          - `queryOne`
+          - `queryAll`
+        - Take as arguments:
+          1. CSS selector
+          2. Record of _element state specifiers_
+    - Temporal Operators:
+        - Change the modality of the sub-expression
+        - Available operators from LTL:
+            - `next :: forall a. a -> a`
+            - `always :: Boolean -> Boolean`
+            - `until :: Boolean -> Boolean -> Boolean`
+
+    - Actions
+        - ...
+    
+    - Haskell interpreter
+        - Some supported PureScript packages:
+          - `numbers`
+          - `strings`
+          - `arrays`
+          - `transformers`
+          - `generics-rep`
+          - ...
+        - FFI is implemented in Haskell
+            - Packages' foreign functions are built into Quickstrom
 
 
 - The TodoMVC Showdown
