@@ -45,7 +45,10 @@ classoption: dvipsnames
     - Specification language
         - Based on PureScript
         - Extended with:
-            - LTL operators (propositional temporal logic)
+            - LTL operators
+              - propositional
+              - linear temporal logic
+              - finite traces
             - DOM queries
         - Use regular PureScript packages
         - Interpreter built in Haskell
@@ -64,7 +67,19 @@ classoption: dvipsnames
             - `until :: Boolean -> Boolean -> Boolean`
 
     - Actions
-        - ...
+        - We must instruct Quickstrom which actions to try
+        - List of weighted probabilities and action specifiers
+            ```
+            Array (Tuple Int Action)
+            ```
+        - Comes with predefined actions, e.g.:
+            ```
+            -- | Generate focus actions on common focusable elements.
+            foci :: Actions
+            foci = [ Tuple 1 (Focus "input"), Tuple 1 (Focus "textarea") ]
+            ```
+        - Might need to carefully pick selectors, actions, and weights
+
     
     - Haskell interpreter
         - Some supported PureScript packages:
