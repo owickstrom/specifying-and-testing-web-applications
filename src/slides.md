@@ -7,6 +7,19 @@ theme: Boadilla
 classoption: dvipsnames
 ---
 
+- Introduction
+    - Quickstrom
+        - Autonomous browser testing
+        - Test anything that renders to the DOM
+        - You write specifications
+        - Quickstrom explores your application and finds invalid behaviors
+    - Today's agenda
+        - Background
+        - TodoMVC Showdown
+        - Specification language
+        - Checking webapps
+        - Future work
+        - Q&A
 - Background
     - Web development
         - Always an interest of mine
@@ -40,6 +53,9 @@ classoption: dvipsnames
             4. Go to 1
         3. Check that the behavior satisfies the specification
         4. If rejected, shrink sequence of actions
+
+- The TodoMVC Showdown
+    - TODO
 
 - Specification language
     - Specification language
@@ -92,6 +108,4 @@ classoption: dvipsnames
         - FFI is implemented in Haskell
             - Packages' foreign functions are built into Quickstrom
 
-
-- The TodoMVC Showdown
-
+- Checking webapps
