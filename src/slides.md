@@ -23,7 +23,7 @@ classoption: dvipsnames
 - Background
     - Web development
         - Always an interest of mine
-        - Huge area
+        - Huge area and market
         - Browser testing is mainly example/scenario based
     - Property-based testing
         - Last few years
@@ -55,16 +55,27 @@ classoption: dvipsnames
         4. If rejected, shrink sequence of actions
 
 - The TodoMVC Showdown
-    - TODO
+    - Early benchmark: TodoMVC
+        - Use TodoMVC as a test for Quickstrom
+        - Wrote a spec (for new and legacy formats)
+        - Checked mainstream implementations
+        - Found issues in Angular and Mithril implementations
+        - Submitted a [GitHub issue](https://github.com/tastejs/todomvc/issues/2116) with findings
+    - The TodoMVC Showdown:
+        - Improved the specification
+        - Ran on all implementations
+        - Results:
+          - 37 passed
+          - 12 failed
+          - 4 not testable
+        - Wrote a [blog post](https://wickstrom.tech/programming/2020/07/02/the-todomvc-showdown-testing-with-webcheck.html) with findings
 
 - Specification language
     - Specification language
         - Based on PureScript
         - Extended with:
-            - LTL operators
-              - propositional
-              - linear temporal logic
-              - finite traces
+            - Linear temporal logic operators 
+              - [De Giacomo, Giuseppe & Vardi, Moshe. (2013). Linear temporal logic and Linear Dynamic Logic on finite traces. IJCAI International Joint Conference on Artificial Intelligence. 854-860.](https://www.researchgate.net/publication/285919325_Linear_temporal_logic_and_Linear_Dynamic_Logic_on_finite_traces)
             - DOM queries
         - Use regular PureScript packages
         - Interpreter built in Haskell
@@ -109,3 +120,23 @@ classoption: dvipsnames
             - Packages' foreign functions are built into Quickstrom
 
 - Checking webapps
+    - Running tests
+    - Cross-browser testing
+    - Trailing state changes
+
+- Future work
+
+    - Possible features
+        - Better error reporting
+        - Coverage (for specifications)
+        - Screenshotting unique states
+        - Targeted search
+    - Commercial product
+        - Keep Quickstrom and the CLI open source
+        - Build a SaaS on top
+            - Browser-based IDE for specs and runner
+            - Scheduled checks and reports
+            - Integrations (CI, WebDriver services)
+            - Alternative specification language (e.g. subset of JavaScript)
+
+- Q&A
