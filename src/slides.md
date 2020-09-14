@@ -8,11 +8,14 @@ classoption: dvipsnames
 ---
 
 - Introduction
+
     - Quickstrom
         - Autonomous browser testing
         - Test anything that renders to the DOM
         - You write specifications
-        - Quickstrom explores your application and finds invalid behaviors
+        - Quickstrom explores your application and finds invalid
+          behaviors
+
     - Today's agenda
         - Background
         - TodoMVC Showdown
@@ -20,6 +23,7 @@ classoption: dvipsnames
         - Checking webapps
         - Future work
         - Q&A
+
 - Background
     - Web development
         - Always an interest of mine
@@ -46,29 +50,34 @@ classoption: dvipsnames
         - Started in April 2020
     - How it works
         1. Navigate to *origin page*
-        2. Record behavior (sequence of states)
+        2. Record a trace (sequence of states and actions)
             1. Generate random actions
             2. Pick one *possible* action and perform it
             3. Record state
             4. Go to 1
-        3. Check that the behavior satisfies the specification
+        3. Check that the behavior (only the states) satisfies the
+           specification
         4. If rejected, shrink sequence of actions
 
 - The TodoMVC Showdown
     - Early benchmark: TodoMVC
         - Use TodoMVC as a test for Quickstrom
-        - Wrote a spec (for new and legacy formats)
+        - Wrote a single spec (for new and legacy formats)
         - Checked mainstream implementations
         - Found issues in Angular and Mithril implementations
-        - Submitted a [GitHub issue](https://github.com/tastejs/todomvc/issues/2116) with findings
+        - Submitted a [GitHub
+          issue](https://github.com/tastejs/todomvc/issues/2116) with
+          findings
     - The TodoMVC Showdown:
         - Improved the specification
-        - Ran on all implementations
+        - Checked all implementations
         - Results:
           - 37 passed
           - 12 failed
           - 4 not testable
-        - Wrote a [blog post](https://wickstrom.tech/programming/2020/07/02/the-todomvc-showdown-testing-with-webcheck.html) with findings
+        - Wrote a [blog
+          post](https://wickstrom.tech/programming/2020/07/02/the-todomvc-showdown-testing-with-webcheck.html)
+          detailing the results
 
 - Specification language
     - Specification language
@@ -79,6 +88,14 @@ classoption: dvipsnames
             - DOM queries
         - Use regular PureScript packages
         - Interpreter built in Haskell
+    - Temporal Operators:
+        - Change the modality of the sub-expression
+        - Available operators from LTL:
+            ```haskell
+            next :: forall a. a -> a
+            always :: Boolean -> Boolean
+            until :: Boolean -> Boolean -> Boolean
+            ```
     - DOM Queries
         - Two operators:
           - `queryOne`
@@ -86,26 +103,33 @@ classoption: dvipsnames
         - Take as arguments:
           1. CSS selector
           2. Record of _element state specifiers_
-    - Temporal Operators:
-        - Change the modality of the sub-expression
-        - Available operators from LTL:
-            - `next :: forall a. a -> a`
-            - `always :: Boolean -> Boolean`
-            - `until :: Boolean -> Boolean -> Boolean`
+        - Examples:
+            
+            ```haskell
+            queryAll "button" { textContent, disabled }
+                :: Array { textContent :: String, disabled :: Bool }
+
+            queryOne "input" { value }
+                :: Maybe { value :: String }
+            ```
 
     - Actions
         - We must instruct Quickstrom which actions to try
         - List of weighted probabilities and action specifiers
+
             ```
             Array (Tuple Int Action)
             ```
+
         - Comes with predefined actions, e.g.:
-            ```
+
+            ```haskell
             -- | Generate focus actions on common focusable elements.
             foci :: Actions
             foci = [ Tuple 1 (Focus "input"), Tuple 1 (Focus "textarea") ]
             ```
-        - Might need to carefully pick selectors, actions, and weights
+
+        - Often need to carefully pick selectors, actions, and weights
 
     
     - Haskell interpreter
@@ -121,8 +145,41 @@ classoption: dvipsnames
 
 - Checking webapps
     - Running tests
+        - Use the `check` command:
+    
+            ```sh
+            quickstrom check \
+                /path/to/my/specification \
+                http://example.com
+            ```
+
+        - Origin can be a file:
+
+            ```sh
+            quickstrom check \
+                /path/to/my/specification \
+                /path/to/my/webapp.html
+            ```
+
+        - Requires a WebDriver server
+
     - Cross-browser testing
+        - Currently supports two browsers:
+            - Firefox
+            - Chrome/Chromium
+        - Set the browser flag
+        
+            ```sh
+            quickstrom check --browser=chrome ...
+            ```
+
     - Trailing state changes
+        - Default: record a single state change after each action
+        - Can be overriden to record *trailing* state changes
+        - Often caused by asynchronous operations
+        - Two command-line options:
+            - `--max-trailing-state-changes`
+            - `--trailing-state-change-timeout`
 
 - Future work
 
