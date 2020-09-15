@@ -43,18 +43,22 @@ classoption: dvipsnames
 
 ## Formal Methods
 
-- F*
-- TLA+
-- Temporal logics
+- I've been exploring:
+    - F*
+    - TLA+
+    - Temporal logics
 
-## Quickstrom
+## Idea: A Beautiful Mix
 
-- Idea: mix these together
-    - Use linear temporal logic (LTL) and learnings from formal methods
-    - Use it for browser testing
-    - Leverage the DOM and introspective capabilities
-    - Run as property-based tests
-- Benefits (on top of PBT):
+- Use linear temporal logic (LTL) and learnings from formal methods
+- Use it for browser testing
+- Leverage the DOM and introspective capabilities
+- Run as property-based tests
+
+## Benefits of Quickstrom
+
+- Many strenghts of property-based testing
+- But also:
     - Focus on specifying and understanding
     - No more `sleep` or `wait`
     - Safety properties can be "weak"
@@ -62,14 +66,14 @@ classoption: dvipsnames
 ## How It Works
 
 1. Navigate to *origin page*
-2. Record a trace (sequence of states and actions)
+2. Record a trace (sequence of states and actions):
     1. Generate random actions
     2. Pick one *possible* action and perform it
     3. Record state
-    4. Go to 1
+    4. Go to 2.1 if not done
 3. Check that the behavior (only the states) satisfies the
    specification
-4. If rejected, shrink sequence of actions
+4. If rejected, shrink sequence of actions and rerun
 
 # The TodoMVC Showdown
 
@@ -100,8 +104,8 @@ classoption: dvipsnames
 
 - Based on PureScript
 - Extended with:
-    - Linear temporal logic operators 
-      - [De Giacomo, Giuseppe & Vardi, Moshe. (2013). Linear temporal logic and Linear Dynamic Logic on finite traces. IJCAI International Joint Conference on Artificial Intelligence. 854-860.](https://www.researchgate.net/publication/285919325_Linear_temporal_logic_and_Linear_Dynamic_Logic_on_finite_traces)
+    - Linear temporal logic operators
+      - [De Giacomo, G., and Vardi, M. 2013](https://www.researchgate.net/publication/285919325_Linear_temporal_logic_and_Linear_Dynamic_Logic_on_finite_traces)
     - DOM queries
 - Use regular PureScript packages
 - Interpreter built in Haskell
@@ -110,6 +114,7 @@ classoption: dvipsnames
 
 - Change the modality of the sub-expression
 - Available operators from LTL:
+
     ```haskell
     next :: forall a. a -> a
     always :: Boolean -> Boolean
@@ -124,15 +129,18 @@ classoption: dvipsnames
 - Take as arguments:
   1. CSS selector
   2. Record of _element state specifiers_
-- Examples:
-    
-    ```haskell
-    queryAll "button" { textContent, disabled }
-        :: Array { textContent :: String, disabled :: Bool }
 
-    queryOne "input" { value }
-        :: Maybe { value :: String }
-    ```
+## Example: DOM Queries
+    
+```haskell
+queryAll "button" { textContent, disabled }
+    :: Array { textContent :: String
+             , disabled :: Bool 
+             }
+
+queryOne "input" { value }
+    :: Maybe { value :: String }
+```
 
 ## Actions
 
@@ -143,14 +151,7 @@ classoption: dvipsnames
     Array (Tuple Int Action)
     ```
 
-- Comes with predefined actions, e.g.:
-
-    ```haskell
-    -- | Generate focus actions on common focusable elements.
-    foci :: Actions
-    foci = [ Tuple 1 (Focus "input"), Tuple 1 (Focus "textarea") ]
-    ```
-
+- Comes with predefined actions, e.g. `foci`, `clicks`
 - Often need to carefully pick selectors, actions, and weights
 
 ## Haskell Interpreter
@@ -161,7 +162,6 @@ classoption: dvipsnames
   - `arrays`
   - `transformers`
   - `generics-rep`
-  - ...
 - FFI is implemented in Haskell
     - Packages' foreign functions are built into Quickstrom
 
@@ -169,58 +169,55 @@ classoption: dvipsnames
 
 ## Running Tests
 
-- Use the `check` command:
+Use the `check` command:
 
-    ```sh
-    quickstrom check \
-        /path/to/my/specification \
-        http://example.com
-    ```
+```sh
+quickstrom check Example.spec.purs http://example.com
+```
 
-- Origin can be a file:
+Origin can be a file:
 
-    ```sh
-    quickstrom check \
-        /path/to/my/specification \
-        /path/to/my/webapp.html
-    ```
-
-- Requires a WebDriver server
+```sh
+quickstrom check Example.spec.purs example.html
+```
 
 ## Cross-Browser Testing
 
 - Currently supports two browsers:
     - Firefox
     - Chrome/Chromium
-- Set the browser flag
-
-    ```sh
-    quickstrom check --browser=chrome ...
-    ```
+- Theoretically all WebDriver-enabled browsers
 
 ## Trailing State Changes
 
-- Default: record a single state change after each action
-- Can be overriden to record *trailing* state changes
+- **Default:** record a single state change after each action
+- **Override:** also record *trailing* state changes
 - Often caused by asynchronous operations
 - Two command-line options:
     - `--max-trailing-state-changes`
     - `--trailing-state-change-timeout`
 
-# Future Work
+# What's Next?
 
-- Possible Features
-    - Better error reporting
-    - Coverage (for specifications)
-    - Screenshotting unique states
-    - Targeted search
+## Possible Features
 
-- Commercial Product
-    - Keep Quickstrom and the CLI open source
-    - Build a SaaS on top
-        - Browser-based IDE for specs and runner
-        - Scheduled checks and reports
-        - Integrations (CI, WebDriver services)
-        - Alternative specification language (e.g. subset of JavaScript)
+- Better error reporting
+- Coverage (for specifications)
+- Targeted search
+- Screenshotting unique states
+
+## Commercial Product
+
+- Keep Quickstrom and the CLI open source
+- Build a SaaS on top
+    - Browser-based IDE for specs and runner
+    - Scheduled checks and reports
+    - Integrations (CI, WebDriver services)
+    - Alternative specification language (e.g. subset of JavaScript)
+    
+## Resources
+
+- [quickstrom.io](https://quickstrom.io/) (main website)
+- [buttondown.email/quickstrom](https://buttondown.email/quickstrom) (newsletter)
 
 # Q&A

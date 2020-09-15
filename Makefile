@@ -74,6 +74,7 @@ $(SLIDES_NO_NOTES): target/slides-no-notes.tex $(IMAGES)
 target/html/index.html: $(SRCS) src/header.html src/theme.css $(IMAGES)
 	mkdir -p target/html
 	cp -r src/images target/html/
+	cp -r src/theme.css target/html/
 	pandoc $(PANDOC_FLAGS) \
 		-s \
 		--slide-level=2 \
@@ -82,6 +83,9 @@ target/html/index.html: $(SRCS) src/header.html src/theme.css $(IMAGES)
 		-V controls=true \
 		-V transition=slide \
 		-V transitionSpeed=fast \
+		--css theme.css \
+		--css https://gist.githubusercontent.com/aarongodin/14cbfeda30e725dc6fb802e3dfb01231/raw/b370dd18211309ad1eb33f8ad2e637f6d5248887/cascadia-code.css \
+		--highlight-style src/highlight.theme \
 		src/slides.md \
 		-o $@
 
