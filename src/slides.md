@@ -154,7 +154,30 @@ queryOne "input" { value }
 - Comes with predefined actions, e.g. `foci`, `clicks`
 - Often need to carefully pick selectors, actions, and weights
 
-## Haskell Interpreter
+## Specification Structure
+
+```haskell
+module Spec where
+
+import Quickstrom
+
+readyWhen = ".my-app"
+
+actions = clicks -- or something else
+
+proposition = initial 
+  && always (transition1 || transition2 || ...)
+```
+
+## State Transitions
+
+```haskell
+transition1 =
+  (something == "foo")
+  && next (something == "bar")
+```
+
+## PureScript Support
 
 - Some supported PureScript packages:
   - `numbers`
