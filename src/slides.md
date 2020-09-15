@@ -10,8 +10,8 @@ classoption: dvipsnames
 ## Quickstrom
 
 - Autonomous browser testing
-- Test anything that renders to the DOM
 - You write specifications
+- Test anything that renders to the DOM
 - Quickstrom explores your application and finds invalid behaviors
 
 ## Today's Agenda
