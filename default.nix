@@ -17,10 +17,10 @@ let
 
   haskellPackages = pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: {
-      pandoc-emphasize-code = githubHaskellPackage self {
+      pandoc-include-code = githubHaskellPackage self {
         owner = "owickstrom";
-        repo = "pandoc-emphasize-code";
-        path = ./nix/pandoc-emphasize-code.json;
+        repo = "pandoc-include-code";
+        path = ./nix/pandoc-include-code.json;
         repoSubDir = "";
       } { };
     };
@@ -34,11 +34,10 @@ in pkgs.stdenv.mkDerivation {
   '';
   buildInputs = with pkgs; [
     nixfmt
-    pympress
     pandoc
+    python3
     texlive.combined.scheme-full
     haskellPackages.pandoc-include-code
-    haskellPackages.pandoc-emphasize-code
   ];
   FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = fonts; };
 }

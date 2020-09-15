@@ -11,7 +11,6 @@ PANDOC_FLAGS= -s \
 						  -f markdown+multiline_tables \
 						  --mathjax \
 						  --filter pandoc-include-code \
-						  --filter pandoc-emphasize-code \
 						  -fmarkdown-implicit_figures
 
 PANDOC_BEAMER_FLAGS=$(PANDOC_FLAGS) \
@@ -31,7 +30,7 @@ SLIDES_NO_NOTES_DIR=target/slides-no-notes
 SLIDES_NO_NOTES=$(SLIDES_NO_NOTES_DIR)/slides-no-notes.pdf
 
 .PHONY: all
-all: html-slides
+all: html-slides pdf-slides
 
 .PHONY: pdf-slides
 pdf-slides: $(SLIDES) $(SLIDES_NO_NOTES)
@@ -74,17 +73,15 @@ $(SLIDES_NO_NOTES): target/slides-no-notes.tex $(IMAGES)
 
 target/html/index.html: $(SRCS) src/header.html src/theme.css $(IMAGES)
 	mkdir -p target/html
-	cp -r lib/* target/html/
 	cp -r src/images target/html/
-	cp src/theme.css target/html/reveal.js/css/theme/owickstrom.css
 	pandoc $(PANDOC_FLAGS) \
+		-s \
+		--slide-level=2 \
 		-t revealjs \
-		-V theme=owickstrom \
+		-V theme=moon \
 		-V controls=true \
 		-V transition=slide \
 		-V transitionSpeed=fast \
-		--no-highlight \
-		-H src/header.html \
 		src/slides.md \
 		-o $@
 
@@ -93,8 +90,7 @@ target/images/%: src/images/%
 	cp $< $@
 
 serve: html-slides
-	(find src | entr -s 'make html-slides && scripts/reload-browser Firefox') &
-	serve -p 10000 target/html
+	python -m http.server --directory target/html
 
 .PHONY: pages
 pages: html-slides
