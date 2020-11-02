@@ -23,36 +23,31 @@ classoption: dvipsnames
 - Future Work
 - Q&A
 
-# Background
+# Background {background=images/eksuddigare.jpg}
 
 ## Background
 
 - Web development
+- Property-Based Testing
+- Formal methods
 
-## Web development
+<aside class="notes">
 
-- Always an interest of mine
-- Huge area and market
-- Browser testing is mainly example/scenario based
+* Web development
+  - Always an interest of mine
+  - Huge area and market
+  - Browser testing is mainly example/scenario based
+* Property based testing
+  - Last few years: Blog posts, book
+  - State machine testing for UIs
+      - Lots of work
+      - Boilerplate
+      - Requires a full model
+* Formal methods: F*, TLA+, Temporal logics
 
-## Property-Based Testing
+</aside>
 
-- Last few years
-    - Blog posts
-    - Book: "Property-Based Testing in a Screencast Editor"
-- State machine testing for UIs
-    - Lots of work
-    - Boilerplate
-    - Requires a full model
-
-## Formal Methods
-
-- I've been exploring:
-    - F*
-    - TLA+
-    - Temporal logics
-
-## Idea: A Beautiful Mix
+## Idea: Mash it up!
 
 - Use linear temporal logic (LTL) and learnings from formal methods
 - Use it for browser testing
@@ -79,7 +74,7 @@ classoption: dvipsnames
    specification
 4. If rejected, shrink sequence of actions and rerun
 
-# The TodoMVC Showdown
+# The TodoMVC Showdown {background=images/horisont.jpg}
 
 ## Early benchmark: TodoMVC
 
@@ -102,7 +97,7 @@ classoption: dvipsnames
   post](https://wickstrom.tech/programming/2020/07/02/the-todomvc-showdown-testing-with-webcheck.html)
   detailing the results
 
-# Specification Language
+# Specification Language {background=images/strand.jpg}
 
 ## Specification Language
 
@@ -192,7 +187,7 @@ transition1 =
 - FFI is implemented in Haskell
     - Packages' foreign functions are built into Quickstrom
 
-# Checking Webapps
+# Checking Webapps {background=images/ekskarp.jpg}
 
 ## Running Tests
 
@@ -224,7 +219,7 @@ quickstrom check Example.spec.purs example.html
     - `--max-trailing-state-changes`
     - `--trailing-state-change-timeout`
 
-# What's Next?
+# What's Next? {background=images/apple.jpg}
 
 ## Possible Features
 
@@ -247,4 +242,4 @@ quickstrom check Example.spec.purs example.html
 - [quickstrom.io](https://quickstrom.io/) (main website)
 - [buttondown.email/quickstrom](https://buttondown.email/quickstrom) (newsletter)
 
-# Q&A
+# Q&A {background=images/nypon.jpg}

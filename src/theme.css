@@ -127,4 +127,6 @@
     counter-increment: item;
     color: #999;
 }
-
+.reveal .slide-background-content {
+  filter: contrast(80%) saturate(80%) brightness(60%);
+}
