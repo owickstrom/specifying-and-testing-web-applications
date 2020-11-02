@@ -10,7 +10,6 @@ SRCS=$(shell find src -name '*.tex') \
 PANDOC_FLAGS= -s \
 						  -f markdown+multiline_tables \
 						  --mathjax \
-						  --filter pandoc-include-code \
 						  -fmarkdown-implicit_figures
 
 PANDOC_BEAMER_FLAGS=$(PANDOC_FLAGS) \
