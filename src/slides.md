@@ -25,6 +25,10 @@ classoption: dvipsnames
 
 # Background
 
+## Background
+
+- Web development
+
 ## Web development
 
 - Always an interest of mine
