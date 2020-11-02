@@ -28,7 +28,7 @@ classoption: dvipsnames
 ## Background
 
 - Web development
-- Property-Based Testing
+- Property-based testing
 - Formal methods
 
 <aside class="notes">
@@ -37,7 +37,7 @@ classoption: dvipsnames
   - Always an interest of mine
   - Huge area and market
   - Browser testing is mainly example/scenario based
-* Property based testing
+* Property-based testing
   - Last few years: Blog posts, book
   - State machine testing for UIs
       - Lots of work
@@ -49,18 +49,20 @@ classoption: dvipsnames
 
 ## Idea: Mash it up!
 
-- Use linear temporal logic (LTL) and learnings from formal methods
+- Combine linear temporal logic (LTL) with an expressive functional language
 - Use it for browser testing
 - Leverage the DOM and introspective capabilities
 - Run as property-based tests
 
-## Benefits of Quickstrom
+## Goals of Quickstrom
 
-- Many strenghts of property-based testing
-- But also:
-    - Focus on specifying and understanding
-    - No more `sleep` or `wait`
-    - Safety properties can be "weak"
+- Goals:
+  - Tester should focus on specifying and understanding
+  - No more `sleep` or `wait`
+  - Specifications can be "weak"
+- Non-goals:
+  - Deterministic testing, shrinking
+  - Support for specific frameworks
 
 ## How It Works
 
@@ -221,7 +223,14 @@ quickstrom check Example.spec.purs example.html
 
 # What's Next? {background=images/apple.jpg}
 
-## Possible Features
+## The Specification Language
+
+- PureScript was a very good first choice
+- A custom language is probably the next step
+- Currently working together with [Liam O'Connor](https://twitter.com/kamatsu8)
+
+
+## Possible Improvements
 
 - Better error reporting
 - Coverage (for specifications)
