@@ -214,7 +214,7 @@ quickstrom check Example.spec.purs example.html
 
 ## Trailing State Changes
 
-- **Default:** record a single state change after each action
+- **Default:** record a single state after each action
 - **Override:** also record *trailing* state changes
 - Often caused by asynchronous operations
 - Two command-line options:
@@ -244,7 +244,6 @@ quickstrom check Example.spec.purs example.html
     - Browser-based IDE for specs and runner
     - Scheduled checks and reports
     - Integrations (CI, WebDriver services)
-    - Alternative specification language (e.g. subset of JavaScript)
     
 ## Resources
 
