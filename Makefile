@@ -12,21 +12,7 @@ PANDOC_FLAGS= -s \
 						  --mathjax \
 						  -fmarkdown-implicit_figures
 
-PANDOC_BEAMER_FLAGS=$(PANDOC_FLAGS) \
-										-t beamer \
-										--slide-level=2 \
-										-H src/customizations.tex \
-										-Vurlcolor=linkcolor \
-										--listings
-
 IMAGES_SRCS=$(shell find src/images -name '*.*')
-IMAGES=$(IMAGES_SRCS:src/images/%=target/images/%)
-
-SLIDES_DIR=target/slides
-SLIDES=$(SLIDES_DIR)/slides.pdf
-
-SLIDES_NO_NOTES_DIR=target/slides-no-notes
-SLIDES_NO_NOTES=$(SLIDES_NO_NOTES_DIR)/slides-no-notes.pdf
 
 .PHONY: all
 all: html-slides
@@ -34,7 +20,7 @@ all: html-slides
 .PHONY: html-slides
 html-slides: target/html/index.html
 
-target/html/index.html: $(SRCS) src/header.html src/theme.css $(IMAGES)
+target/html/index.html: $(SRCS) src/header.html src/theme.css $(IMAGES_SRCS)
 	mkdir -p target/html
 	cp -r src/images target/html/
 	cp -r src/theme.css target/html/
