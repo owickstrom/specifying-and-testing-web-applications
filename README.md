@@ -1,18 +1,15 @@
-# Property-Based Testing the Ugly Parts
+# Quickstrom: Specifying and Testing Web Applications
 
-A talk for MF#K, February 26, 2019
+A talk at Code Mesh LDN 2020
 
-Slides at: https://owickstrom.github.io/property-based-testing-the-ugly-parts/
+Slides at: https://owickstrom.github.io/specifying-and-testing-web-applications
 
 ## Building
 
 This requires:
 
 * Make
-* TexLive
-* Pandoc 2.x
-* pandoc-include-code
-* pandoc-emphasize-code >= 0.2.4
+* Pandoc 2.10.x
 
 Run:
 
@@ -27,4 +24,4 @@ The theme and build configuration is licensed under [Mozilla Public License Vers
 
 The contents of the slides are "All rights reserved" licensed.
 
-Copyright 2018 Oskar Wickström
+Copyright 2020 Oskar Wickström
