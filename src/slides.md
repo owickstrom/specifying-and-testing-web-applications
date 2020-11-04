@@ -9,10 +9,9 @@ classoption: dvipsnames
 
 ## Quickstrom
 
-- Autonomous browser testing
-- Testers write specifications
-- It explores your application and finds invalid behaviors
-- Test anything that renders to the DOM
+- Autonomous browser testing based on specifications
+- Explores your application and finds invalid behaviors
+- Tests anything that renders to the DOM
 
 ## Today's Agenda
 
@@ -25,7 +24,7 @@ classoption: dvipsnames
 
 # Background {background=images/eksuddigare.jpg}
 
-## Background
+## Interests
 
 - Web development
 - Property-based testing
@@ -59,7 +58,7 @@ classoption: dvipsnames
 - Goals:
   - Tester should focus on specifying and understanding
   - No more `sleep` or `wait`
-  - Specifications can be "weak"
+  - Support partial specifications
 - Non-goals:
   - Deterministic testing, shrinking
   - Support for specific frameworks
