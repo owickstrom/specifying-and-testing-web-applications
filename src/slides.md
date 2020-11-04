@@ -2,7 +2,7 @@
 title: Quickstrom
 subtitle: Specifying and Testing Web Applications
 author: Oskar Wickström
-date: September 2020
+date: Code Mesh, November 2020
 theme: Boadilla
 classoption: dvipsnames
 ---
@@ -10,9 +10,9 @@ classoption: dvipsnames
 ## Quickstrom
 
 - Autonomous browser testing
-- You write specifications
+- Testers write specifications
+- It explores your application and finds invalid behaviors
 - Test anything that renders to the DOM
-- Quickstrom explores your application and finds invalid behaviors
 
 ## Today's Agenda
 
