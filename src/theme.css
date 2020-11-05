@@ -111,6 +111,14 @@
   max-height: 400px;
   word-wrap: normal; }
 
+.reveal pre.console {
+    line-height: 1.2;
+    font-size: 50%;
+}
+.reveal pre.console code {
+    font-size: 100%;
+}
+
 .reveal ol, .reveal ul {
     display: block;
 }

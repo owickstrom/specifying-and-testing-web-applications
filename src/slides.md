@@ -48,20 +48,33 @@ classoption: dvipsnames
 
 ## Idea: Mash it up!
 
-- Combine linear temporal logic (LTL) with an expressive functional language
-- Use it for browser testing
+- Combine linear temporal logic (LTL) with a functional language
 - Leverage the DOM and introspective capabilities
 - Run as property-based tests
 
-## Goals of Quickstrom
+<aside class="notes">
 
-- Goals:
-  - Tester should focus on specifying and understanding
-  - No more `sleep` or `wait`
-  - Support partial specifications
-- Non-goals:
-  - Deterministic testing, shrinking
-  - Support for specific frameworks
+* Specification language: 
+  - Combine ...
+  - Express how systems change state over time
+  - State from DOM queries
+* DOM can be introspected
+    - Reduces the coupling between implementation and specification
+* Runs very much like property-based-tests
+
+</aside>
+
+## Goals
+
+- Tester should focus on specifying and understanding
+- No more `sleep` or `wait`
+- Support partial specifications
+
+## Non-goals
+
+- Deterministic testing
+  - Optional shrinking
+- Support for specific frameworks
 
 ## How It Works
 
@@ -105,7 +118,6 @@ classoption: dvipsnames
 - Based on PureScript
 - Extended with:
     - Linear temporal logic operators
-      - [De Giacomo, G., and Vardi, M. 2013](https://www.researchgate.net/publication/285919325_Linear_temporal_logic_and_Linear_Dynamic_Logic_on_finite_traces)
     - DOM queries
 - Use regular PureScript packages
 - Interpreter built in Haskell
@@ -202,6 +214,29 @@ Origin can be a file:
 
 ```sh
 quickstrom check Example.spec.purs example.html
+```
+
+## Test Failures
+
+```console
+1. State
+  • .play-pause
+      -
+         - property "textContent" = "Play"
+  • .time-display
+      -
+         - property "textContent" = "00:00"
+2. click button[0]
+3. click button[0]
+4. State
+  • .play-pause
+      -
+         - property "textContent" = "Play"
+  • .time-display
+      -
+         - property "textContent" = "NaN:NaN"
+
+Failed after 1 tests and 4 levels of shrinking.
 ```
 
 ## Cross-Browser Testing
