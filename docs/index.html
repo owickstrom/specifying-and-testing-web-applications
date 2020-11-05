@@ -91,16 +91,15 @@
   <h1 class="title">Quickstrom</h1>
   <p class="subtitle">Specifying and Testing Web Applications</p>
   <p class="author">Oskar Wickström</p>
-  <p class="date">September 2020</p>
+  <p class="date">Code Mesh, November 2020</p>
 </section>
 
 <section id="quickstrom" class="slide level2">
 <h2>Quickstrom</h2>
 <ul>
-<li>Autonomous browser testing</li>
-<li>You write specifications</li>
-<li>Test anything that renders to the DOM</li>
-<li>Quickstrom explores your application and finds invalid behaviors</li>
+<li>Autonomous browser testing based on specifications</li>
+<li>Explores your application and finds invalid behaviors</li>
+<li>Tests anything that renders to the DOM</li>
 </ul>
 </section>
 <section id="todays-agenda" class="slide level2">
@@ -119,8 +118,8 @@
 <h1 data-background="images/eksuddigare.jpg">Background</h1>
 
 </section>
-<section id="background-1" class="slide level2">
-<h2>Background</h2>
+<section id="interests" class="slide level2">
+<h2>Interests</h2>
 <ul>
 <li>Web development</li>
 <li>Property-based testing</li>
@@ -151,26 +150,42 @@
 <section id="idea-mash-it-up" class="slide level2">
 <h2>Idea: Mash it up!</h2>
 <ul>
-<li>Combine linear temporal logic (LTL) with an expressive functional language</li>
-<li>Use it for browser testing</li>
+<li>Combine linear temporal logic (LTL) with a functional language</li>
 <li>Leverage the DOM and introspective capabilities</li>
 <li>Run as property-based tests</li>
 </ul>
-</section>
-<section id="goals-of-quickstrom" class="slide level2">
-<h2>Goals of Quickstrom</h2>
+<aside class="notes">
 <ul>
-<li>Goals:
+<li>Specification language:
+<ul>
+<li>Combine …</li>
+<li>Express how systems change state over time</li>
+<li>State from DOM queries</li>
+</ul></li>
+<li>DOM can be introspected
+<ul>
+<li>Reduces the coupling between implementation and specification</li>
+</ul></li>
+<li>Runs very much like property-based-tests</li>
+</ul>
+</aside>
+</section>
+<section id="goals" class="slide level2">
+<h2>Goals</h2>
 <ul>
 <li>Tester should focus on specifying and understanding</li>
 <li>No more <code>sleep</code> or <code>wait</code></li>
-<li>Specifications can be “weak”</li>
-</ul></li>
-<li>Non-goals:
+<li>Support partial specifications</li>
+</ul>
+</section>
+<section id="non-goals" class="slide level2">
+<h2>Non-goals</h2>
 <ul>
-<li>Deterministic testing, shrinking</li>
-<li>Support for specific frameworks</li>
+<li>Deterministic testing
+<ul>
+<li>Optional shrinking</li>
 </ul></li>
+<li>Support for specific frameworks</li>
 </ul>
 </section>
 <section id="how-it-works" class="slide level2">
@@ -228,10 +243,7 @@
 <li>Based on PureScript</li>
 <li>Extended with:
 <ul>
-<li>Linear temporal logic operators
-<ul>
-<li><a href="https://www.researchgate.net/publication/285919325_Linear_temporal_logic_and_Linear_Dynamic_Logic_on_finite_traces">De Giacomo, G., and Vardi, M. 2013</a></li>
-</ul></li>
+<li>Linear temporal logic operators</li>
 <li>DOM queries</li>
 </ul></li>
 <li>Use regular PureScript packages</li>
@@ -331,6 +343,27 @@
 <p>Origin can be a file:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="ex">quickstrom</span> check Example.spec.purs example.html</span></code></pre></div>
 </section>
+<section id="test-failures" class="slide level2">
+<h2>Test Failures</h2>
+<pre class="console"><code>1. State
+  • .play-pause
+      -
+         - property &quot;textContent&quot; = &quot;Play&quot;
+  • .time-display
+      -
+         - property &quot;textContent&quot; = &quot;00:00&quot;
+2. click button[0]
+3. click button[0]
+4. State
+  • .play-pause
+      -
+         - property &quot;textContent&quot; = &quot;Play&quot;
+  • .time-display
+      -
+         - property &quot;textContent&quot; = &quot;NaN:NaN&quot;
+
+Failed after 1 tests and 4 levels of shrinking.</code></pre>
+</section>
 <section id="cross-browser-testing" class="slide level2">
 <h2>Cross-Browser Testing</h2>
 <ul>
@@ -345,7 +378,7 @@
 <section id="trailing-state-changes" class="slide level2">
 <h2>Trailing State Changes</h2>
 <ul>
-<li><strong>Default:</strong> record a single state change after each action</li>
+<li><strong>Default:</strong> record a single state after each action</li>
 <li><strong>Override:</strong> also record <em>trailing</em> state changes</li>
 <li>Often caused by asynchronous operations</li>
 <li>Two command-line options:
@@ -386,7 +419,6 @@
 <li>Browser-based IDE for specs and runner</li>
 <li>Scheduled checks and reports</li>
 <li>Integrations (CI, WebDriver services)</li>
-<li>Alternative specification language (e.g. subset of JavaScript)</li>
 </ul></li>
 </ul>
 </section>
