@@ -2,7 +2,7 @@
 title: Quickstrom
 subtitle: Specifying and Testing Web Applications
 author: Oskar Wickström
-date: Code Mesh, November 2020
+date: Feb 2022
 theme: Boadilla
 classoption: dvipsnames
 ---
@@ -13,7 +13,7 @@ classoption: dvipsnames
 - Explores your application and finds invalid behaviors
 - Tests anything that renders to the DOM
 
-## Today's Agenda
+## Agenda
 
 - Background
 - The TodoMVC Showdown
@@ -24,69 +24,63 @@ classoption: dvipsnames
 
 # Background {background=images/eksuddigare.jpg}
 
-## Interests
+## Testing Stateful Systems
 
-- Web development
 - Property-based testing
+  - Stateful systems
+  - Testing with models
 - Formal methods
 
 <aside class="notes">
 
-* Web development
-  - Always an interest of mine
-  - Huge area and market
-  - Browser testing is mainly example/scenario based
 * Property-based testing
   - Last few years: Blog posts, book
-  - State machine testing for UIs
+  - Testing UIs and webapps with models
       - Lots of work
       - Boilerplate
       - Requires a full model
-* Formal methods: F*, TLA+, Temporal logics
+* Formal methods: F*, TLA+, Alloy, Temporal logics
 
 </aside>
 
-## Idea: Mash it up!
+## Idea!
 
-- Combine linear temporal logic (LTL) with a functional language
+- Use linear temporal logic (LTL) to specify stateful systems
 - Leverage the DOM and introspective capabilities
 - Run as property-based tests
 
 <aside class="notes">
 
 * Specification language: 
-  - Combine ...
+  - Based on LTL
   - Express how systems change state over time
   - State from DOM queries
+  - Select actions from each state
 * DOM can be introspected
     - Reduces the coupling between implementation and specification
-* Runs very much like property-based-tests
+* Run much like property-based-tests
 
 </aside>
 
 ## Goals
 
 - Tester should focus on specifying and understanding
-- No more `sleep` or `wait`
+- More effective testing
+- No need for `sleep` or `wait`
 - Support partial specifications
 
 ## Non-goals
 
 - Deterministic testing
-  - Optional shrinking
 - Support for specific frameworks
 
 ## How It Works
 
 1. Navigate to *origin page*
 2. Record a trace (sequence of states and actions):
-    1. Generate random actions
-    2. Pick one *possible* action and perform it
-    3. Record state
-    4. Go to 2.1 if not done
-3. Check that the behavior (only the states) satisfies the
-   specification
-4. If rejected, shrink sequence of actions and rerun
+    1. Pick a *valid* action and perform it
+    2. Record state
+    3. Go to 2.1 if not done (success, failure, or requiring more actions)
 
 # The TodoMVC Showdown {background=images/horisont.jpg}
 
@@ -115,7 +109,7 @@ classoption: dvipsnames
 
 ## Specification Language
 
-- Based on PureScript
+- Current version is based on PureScript
 - Extended with:
     - Linear temporal logic operators
     - DOM queries
